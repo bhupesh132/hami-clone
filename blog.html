@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hami - Web Hosting</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+
+.popular-tags {
+  position: relative;
+  z-index: 1;
+  margin-left: -3px; }
+  .popular-tags li {
+    display: inline-block;
+    float: left;
+    margin: 3px; }
+    .popular-tags li a {
+      font-size: 13px;
+      display: inline-block;
+      padding: 0 20px;
+      height: 30px;
+      border: 1px solid #ebebeb;
+      font-weight: 400;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 30px;
+      color: #707070; }
+      .popular-tags li a:hover, .popular-tags li a:focus {
+        color: #ffffff;
+        background-color: #1c66de; }
+
+
+        /* Fixed height for carousel to prevent jumping */
+        #heroCarousel, 
+        #heroCarousel .carousel-inner,
+        #heroCarousel .carousel-item,
+        #heroCarousel .carousel-item section {
+            height: 600px; /* Fixed height for all carousel slides */
+            position: relative;
+            z-index: 1; /* Lower z-index than the welcome pattern */
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #1769ff 100%, #3b8cff 0%);
+            height: 100%; /* Use full height of parent */
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .hero-section h1 {
+            font-size: 2.7rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .hero-section p {
+            font-size: 1.25rem;
+            color: #fff;
+            
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #3b82f6;
+            margin-bottom: 10px;
+        }
+        .card {
+            border: none;
+            border-radius: 1rem;
+            box-shadow: 0 0.5rem 1.5rem rgba(30,50,90,0.08);
+        }
+        .card-img-top {
+            border-radius: 1rem 1rem 0 0;
+        }
+        .footer-social a {
+            color: #41506b;
+            margin: 0 0.5rem;
+            font-size: 1.2rem;
+            transition: color 0.2s;
+        }
+        .footer-social a:hover {
+            color: #3b82f6;
+        }
+        .cloud-divider-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background-image: url('cloud-divider-bottom.svg');
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .cloud-divider-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background-image: url('cloud-divider-top.svg');
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        /* Carousel text animation styles */
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        /* Only apply animation on desktop/tablet */
+        @media (min-width: 768px) {
+            .carousel-text-animate {
+                opacity: 0;
+            }
+            
+            .carousel-item.active .carousel-text-animate {
+                animation: slideUp 0.8s forwards;
+            }
+            
+            .carousel-item.active .carousel-text-animate.delay-1 {
+                animation-delay: 0.2s;
+            }
+            
+            .carousel-item.active .carousel-text-animate.delay-2 {
+                animation-delay: 0.4s;
+            }
+            
+            .carousel-item.active .carousel-text-animate.delay-3 {
+                animation-delay: 0.6s;
+            }
+        }
+        
+        /* Make text visible immediately on mobile */
+        @media (max-width: 767.98px) {
+            .carousel-text-animate {
+                opacity: 1;
+                
+            }
+        }
+        
+        /* Ensure consistent image sizing in carousel */
+        .carousel-item .coro img {
+            max-height: 400px;
+            width: auto;
+            object-fit: contain;
+            
+        }
+        
+        /* Welcome pattern section styling - with overlap */
+        .welcome-pattern-section {
+            position: relative;
+            z-index: 10;
+            margin-top: -150px; /* Increased negative margin for more overlap */
+            overflow: visible;
+            padding: 0;
+        }
+        
+        .welcome-pattern-section img {
+            display: block;
+            max-width: 100%;
+        }
+        
+        /* Mobile responsive adjustments for welcome pattern */
+        @media (max-width: 767.98px) {
+            .welcome-pattern-section {
+                margin-top: -80px; /* Reduced overlap for mobile */
+            }
+            .welcome-pattern-section img {
+                height: 120px; /* Set specific height for tablets */
+                object-fit: cover;
+            }
+        }
+        
+        /* Extra small devices */
+        @media (max-width: 575.98px) {
+            .welcome-pattern-section {
+                margin-top: -50px; /* Even less overlap for very small screens */
+            }
+            .welcome-pattern-section img {
+                height: 80px; /* Set smaller height for mobile phones */
+                object-fit: cover;
+            }
+        }
+        
+        /* Ensure offcanvas is only visible on mobile */
+        @media (min-width: 992px) {
+            #offcanvasNavbar {
+                display: none !important;
+            }
+        }
+        
+        /* Cloud Features Grid Styles */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+           
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .feature {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            background-color: #fff;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #e6f0ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            color: #0066ff;
+        }
+        
+        .feature h3 {
+            color: #333;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .feature p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .cloud-waves {
+            width: 100%;
+            height: 100px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="1" d="M0,192L48,176C96,160,192,128,288,138.7C384,149,480,203,576,213.3C672,224,768,192,864,181.3C960,171,1056,181,1152,170.7C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin-top: 30px;
+        }
+        
+        /* Responsive adjustments for features grid */
+        @media (max-width: 900px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Domain Search Mobile Styles */
+        .domain-search-container {
+            max-width: 450px;
+            margin: 0 auto;
+            padding: 20px 15px;
+        }
+        
+        .headline {
+            font-size: 28px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .subheadline {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .domain-input-group {
+            display: flex;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 50px;
+            overflow: hidden;
+        }
+        
+        .domain-input {
+            flex-grow: 1;
+            border: none;
+            padding: 15px 20px;
+            font-size: 16px;
+            border-top-left-radius: 50px;
+            border-bottom-left-radius: 50px;
+        }
+        
+        .domain-input:focus {
+            outline: none;
+            box-shadow: none;
+        }
+        
+        .domain-extension {
+            background-color: white;
+            padding: 15px 5px 15px 0;
+            font-weight: 500;
+            border: none;
+            width: 70px;
+            text-align: center;
+        }
+        
+        .search-btn {
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            font-weight: 500;
+            border-top-right-radius: 50px;
+            border-bottom-right-radius: 50px;
+            width: 130px;
+            font-size: 16px;
+        }
+        
+        .domain-extensions {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        
+        .extension-item {
+            text-align: center;
+            flex: 1;
+            min-width: 55px;
+        }
+        
+        .extension-name {
+            font-weight: 500;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        .extension-price {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        /* Responsive adjustments for domain search */
+        @media (max-width: 767.98px) {
+            .domain-search-box {
+                padding: 15px !important;
+            }
+            
+            .domain-search-mobile {
+                display: block !important;
+            }
+            
+            .domain-search-desktop {
+                display: none !important;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .domain-search-mobile {
+                display: none !important;
+            }
+            
+            .domain-search-desktop {
+                display: block !important;
+            }
+        }
+        
+        /* Pricing Plan Styles */
+        .plan-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .plan-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            margin-bottom: 30px;
+            height: 100%;
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+        
+        .plan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .sale-badge {
+            background-color: #ff6b6b;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #333;
+        }
+        
+        .price-period {
+            color: #6c757d;
+            font-size: 1rem;
+        }
+        
+        .plan-title {
+            font-size: 1.5rem;
+            margin: 15px 0;
+            color: #343a40;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        
+        .feature-list li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #28a745;
+        }
+        
+        .btn-get-started {
+            background-color: #007bff;
+            color: white !important;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+            border-radius: 50px;
+            
+        }
+        
+        .btn-get-started:hover {
+            background-color: #0069d9;
+        }
+        
+        .all-features-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        .all-features-link:hover {
+            text-decoration: underline;
+        }
+        
+        .divider {
+            border-top: 1px solid #dee2e6;
+            margin: 20px 0;
+        }
+        
+        /* Payment Footer Styles */
+        .payment-footer {
+            background-color: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+            padding: 15px 0;
+            font-size: 14px;
+            color: #6c757d;
+        }
+        
+        .payment-icons i {
+            color: #6c757d;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .payment-icons i:hover {
+            opacity: 1;
+        }
+        
+        .heart-icon {
+            color: #dc3545;
+            display: inline-block;
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        .copyright-link {
+            color: #6c757d;
+            transition: color 0.3s ease;
+        }
+        
+        .copyright-link:hover {
+            color: #007bff;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Top Bar -->
+    <div class="bg-primary text-white small py-1">
+        <div class="container nav1">
+            <!-- Desktop version -->
+            <div class="d-none d-md-flex justify-content-between align-items-center">
+                <div>
+                    <i class="bi bi-telephone me-1"></i> Call Us: 001-1234-88888
+                    <span class="mx-2">|</span>
+                    <i class="bi bi-envelope me-1"></i> Email: info@hami.com
+                </div>
+                <div>
+                    <i class="bi bi-person me-1"></i> Login / Register
+                    <span class="mx-2">|</span>
+                    <div class="dropdown d-inline-block">
+                        <a class="text-white text-decoration-none dropdown-toggle" href="#" role="button" id="languageDropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                            <i class="bi bi-globe me-1"></i> English <i class="bi bi-chevron-down small ms-1"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end desktop-lang-dropdown" aria-labelledby="languageDropdown">
+                            <li><a class="dropdown-item" href="#"><img src="https://flagcdn.com/w20/gb.png" width="20" alt="UK"> English</a></li>
+                            <li><a class="dropdown-item" href="#"><img src="https://flagcdn.com/w20/fr.png" width="20" alt="France"> French</a></li>
+                            <li><a class="dropdown-item" href="#"><img src="https://flagcdn.com/w20/es.png" width="20" alt="Spain"> Spanish</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mobile version -->
+            <div class="d-md-none">
+                <div class="d-flex justify-content-between py-1 align-items-center">
+                    <div>
+                        <a href="tel:0011234888888" class="text-white text-decoration-none mx-1">
+                            <i class="bi bi-telephone"></i> 
+                        </a>
+                        <a href="mailto:info@hami.com" class="text-white text-decoration-none mx-1">
+                            <i class="bi bi-envelope"></i> 
+                        </a>
+                        <a href="#" class="text-white text-decoration-none mx-1">
+                            <i class="bi bi-lock-fill"></i> 
+                        </a>
+                        <a href="#" class="text-white text-decoration-none mx-1">
+                            <i class="bi bi-person"></i> 
+                        </a>
+                    </div>
+                    <div class="dropdown">
+                        <a class="text-white text-decoration-none dropdown-toggle" href="#" role="button" id="mobileLanguageDropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end mobile-lang-dropdown" aria-labelledby="mobileLanguageDropdown">
+                            <li><a class="dropdown-item" href="#"><img src="https://flagcdn.com/w20/gb.png" width="20" alt="UK"> English</a></li>
+                            <li><a class="dropdown-item" href="#"><img src="https://flagcdn.com/w20/fr.png" width="20" alt="France"> French</a></li>
+                            <li><a class="dropdown-item" href="#"><img src="https://flagcdn.com/w20/es.png" width="20" alt="Spain"> Spanish</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Navbar with Offcanvas for mobile and regular desktop navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Hami.</a>
+            
+            <!-- Toggle button for offcanvas - visible ONLY on mobile -->
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <!-- Offcanvas menu that slides from left - ONLY for mobile -->
+            <div class="offcanvas offcanvas-start d-lg-none" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title fw-bold" id="offcanvasNavbarLabel">Hami.</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="hosting.html">Hosting</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Pages
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+                                <li><a class="dropdown-item" href="#">About</a></li>
+                                <li><a class="dropdown-item" href="#">Blog</a></li>
+                                <li><a class="dropdown-item" href="#">Contact</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">404</a></li>
+                                <li class="dropend">
+                                    <a class="dropdown-item dropdown-toggle" href="#" id="navbarDropdownComingSoon2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Coming Soon
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-submenu" aria-labelledby="navbarDropdownComingSoon2">
+                                        <li><a class="dropdown-item" href="#">Coming Soon 1</a></li>
+                                        <li><a class="dropdown-item" href="#">Coming Soon 2</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropend">
+                                    <a class="dropdown-item dropdown-toggle" href="#" id="navbarDropdownSubmenu2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        More Options
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-submenu" aria-labelledby="navbarDropdownSubmenu2">
+                                        <li><a class="dropdown-item" href="#">Dropdown Item</a></li>
+                                        <li><a class="dropdown-item" href="#">Dropdown Item</a></li>
+                                        <li><a class="dropdown-item" href="#">Dropdown Item</a></li>
+                                        <li><a class="dropdown-item" href="#">Dropdown Item</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact</a>
+                        </li>
+                        <li class="nav-item mt-3">
+                            <a class="btn btn-outline-primary w-100" href="#"><i class="bi bi-chat-dots me-2"></i>Live Chat</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Regular navbar for desktop ONLY -->
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="hosting.html">Hosting</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Pages
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="about.html">About</a></li>
+                            <li><a class="dropdown-item" href="blog.html">Blog</a></li>
+                            <li><a class="dropdown-item" href="#">Contact</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">404</a></li>
+                            <li class="dropend">
+                                <a class="dropdown-item dropdown-toggle" href="#" id="navbarDropdownComingSoon" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Coming Soon
+                                </a>
+                                <ul class="dropdown-menu dropdown-submenu" aria-labelledby="navbarDropdownComingSoon">
+                                    <li><a class="dropdown-item" href="#">Coming Soon 1</a></li>
+                                    <li><a class="dropdown-item" href="#">Coming Soon 2</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropend">
+                                <a class="dropdown-item dropdown-toggle" href="#" id="navbarDropdownSubmenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    More Options
+                                </a>
+                                <ul class="dropdown-menu dropdown-submenu" aria-labelledby="navbarDropdownSubmenu">
+                                    <li><a class="dropdown-item" href="#">Dropdown Item</a></li>
+                                    <li><a class="dropdown-item" href="#">Dropdown Item</a></li>
+                                    <li><a class="dropdown-item" href="#">Dropdown Item</a></li>
+                                    <li><a class="dropdown-item" href="#">Dropdown Item</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+                        <a class="btn btn-outline-primary px-3 w-100 w-lg-auto" href="#"><i class="bi bi-chat-dots me-2"></i>Live Chat</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+   
+    
+<section>
+    
+        <div class="container ">
+            <div style="padding-bottom: 100px; padding-top: 10px;"><i class="fa-solid fa-house"></i><a href="index.html">home</a> > Blog </div>
+            <div class="row">
+            <div class="col-12 col-md-8" >
+                <div class="header">
+                    <h1 class="w-75 " style="text-align: left;">7 Trends Dominating Content Marketing in 2018
+                    </h1>
+                    <img class="img-fluid" src="image/server.jpg " alt="">   
+
+                    <div style="text-align: left;"><a href="index.html">By Admin</a> | Tutorials </div>
+                    <p class="text-start">By Admin Tutorials
+                        Vestibulum lacus erat, pharetra et sodales ut, porta sit amet nibh. Sed vestibulum lacinia quam, vel iaculis nunc condimentum eget. Aliquam in mi pharetra, molestie augue ac, fermentum orci.
+                        
+                        </p>
+                </div>
+               
+                <div class="header">
+                    <h1 class="w-75 " style="text-align: left;">7 Trends Dominating Content Marketing in 2018
+                    </h1>
+                    <img class="img-fluid" src="image/15.jpg.webp " alt="">   
+
+                    <div style="text-align: left;"><a href="index.html">By Admin</a> | Tutorials </div>
+                    <p class="text-start">By Admin Tutorials
+                        Vestibulum lacus erat, pharetra et sodales ut, porta sit amet nibh. Sed vestibulum lacinia quam, vel iaculis nunc condimentum eget. Aliquam in mi pharetra, molestie augue ac, fermentum orci.
+                        
+                        </p>
+                </div>
+
+                <div class="header">
+                    <h1 class="w-75 " style="text-align: left;">7 Trends Dominating Content Marketing in 2018
+                    </h1>
+                    <img class="img-fluid" src="image/16.jpg.webp " alt="">   
+
+                    <div style="text-align: left;"><a href="index.html">By Admin</a> | Tutorials </div>
+                    <p class="text-start">By Admin Tutorials
+                        Vestibulum lacus erat, pharetra et sodales ut, porta sit amet nibh. Sed vestibulum lacinia quam, vel iaculis nunc condimentum eget. Aliquam in mi pharetra, molestie augue ac, fermentum orci.
+                        
+                        </p>
+                </div>
+
+            </div>
+                <div class="col-12 col-md-4 pt-3">  <input type="text" name="" id="" style="width: 300px;"> 
+                   
+                    <button type="submit " class="btn btn-primary">
+                        <i class="bi-search"></i>
+                    </button> 
+                    <div >
+                        <h3 class="fw-bold"> Categories</h3>
+                        <ul class="list-unstyled list1">
+                            <li>
+                                <i class="fa-solid fa-angles-right"></i>
+                                Content Marketing
+                               
+
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-angles-right"></i>
+                                Conversion Rates
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-angles-right"></i>
+                                Customer Spotlight
+
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-angles-right"></i>
+                                E-commerce Strategy
+
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-angles-right"></i>
+                                Marketing Ideas
+
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-angles-right"></i>
+                                Landing Pages
+
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <div class="d-flex w-75 pt-3 "><img src="image/mulgi.jpg " class="w-25 h-25 " alt="">
+                            <div style="margin-left: 20px;">
+    
+                            <p>Publishing packag esanse web page editos
+                         </p>  <span style="color: #453c3c;  "> December 9, 2018</span> </div></div>
+                    </div>
+                    <div>
+                        <div class="d-flex w-75 pt-3"><img src="image/mulgi.jpg " class="w-25 h-25 " alt="">
+                            <div style="margin-left: 20px;">
+    
+                            <p>Publishing packag esanse web page editos
+                         </p>  <span style="color: #453c3c;  "> December 9, 2018</span> </div></div>
+                    </div>
+                    <div>
+                        <div class="d-flex w-75 pt-3"><img src="image/mulgi.jpg " class="w-25 h-25 " alt="">
+                            <div style="margin-left: 20px;">
+    
+                            <p>Publishing packag esanse web page editos
+                         </p>  <span style="color: #453c3c;  "> December 9, 2018</span> </div></div>
+                    </div>
+                    <div>
+                        <div class="d-flex w-75 pt-3"><img src="image/mulgi.jpg " class="w-25 h-25 " alt="">
+                            <div style="margin-left: 20px;">
+    
+                            <p>Publishing packag esanse web page editos
+                         </p>  <span style="color: #453c3c;  "> December 9, 2018</span> </div></div>
+                    </div>
+
+
+<div>
+    <img class="pt-5" src="image/shoe.png"  alt="">
+</div>
+                  
+                <!-- Popular Tags -->
+                <div class="single-widget-area mb-50">
+                    <h4 class="widget-title mb-30">Popular Tags</h4>
+
+                    <ul class="popular-tags">
+                        <li><a href="#">Creative</a></li>
+                        <li><a href="#">Unique</a></li>
+                        <li><a href="#">Audio</a></li>
+                        <li><a href="#">Ideas</a></li>
+                        <li><a href="#">Dedicated</a></li>
+                        <li><a href="#">Wordpress Template</a></li>
+                        <li><a href="#">Startup</a></li>
+                        <li><a href="#">Video</a></li>
+                    </ul>
+                </div>
+
+                   </div>
+
+                   
+
+        </div>
+        </div>
+
+        
+</section>
+
+
+
+  
+   
+
+
+                    
+       
+  
+
+   
+
+  
+
+ 
+ 
+    <div class="container text-center py-5 fs-2">
+        <p>
+            Proudly Hosting Over <span
+            data-purecounter-start="0"
+            data-purecounter-end="800000"
+            class="purecounter text-primary"
+            >0</span> Websites Since 2000
+        </p>
+     </div>
+ 
+    <!-- Main Footer -->
+    <footer class="footer py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <!-- First Products Column -->
+                <div class="col-md-2 col-6 col-sm-6 mb-4">
+                    <h5>Products</h5>
+                    <div class="footer-links">
+                        <a href="#">Shared Hosting</a>
+                        <a href="#">WordPress Hosting</a>
+                        <a href="#">Vps Hosting</a>
+                        <a href="#">Dedicated Hosting</a>
+                        <a href="#">Reseller Hosting</a>
+                        <a href="#">Hosting Features</a>
+                    </div>
+                </div>
+    
+                <!-- Programs Column -->
+                <div class="col-md-2 col-6 col-sm-6 mb-4">
+                    <h5>Programs</h5>
+                    <div class="footer-links">
+                        <a href="#">WordPress</a>
+                        <a href="#">Affiliates</a>
+                        <a href="#">Marketing Services</a>
+                        <a href="#">WordPress Guide</a>
+                        <a href="#">Testimonials</a>
+                        <a href="#">Awards & Reviews</a>
+                    </div>
+                </div>
+    
+                <!-- Second Products Column -->
+                <div class="col-md-2 col-6 col-sm-6 mb-4">
+                    <h5>Products</h5>
+                    <div class="footer-links">
+                        <a href="#">Shared Hosting</a>
+                        <a href="#">WordPress Hosting</a>
+                        <a href="#">Vps Hosting</a>
+                        <a href="#">Dedicated Hosting</a>
+                        <a href="#">Reseller Hosting</a>
+                        <a href="#">Hosting Features</a>
+                    </div>
+                </div>
+    
+                <!-- Company Column -->
+                <div class="col-md-2 col-6 col-sm-6 mb-4">
+                    <h5>Company</h5>
+                    <div class="footer-links">
+                        <a href="#">About</a>
+                        <a href="#">Careers</a>
+                        <a href="#">Contact</a>
+                        <a href="#">Terms Of Service</a>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Blog</a>
+                    </div>
+                </div>
+    
+                <!-- Newsletter Column -->
+                <div class="col-md-4 col-sm-12 mb-4">
+                    <h5>Subscribe Newsletter</h5>
+                    <p>Subscribe to our email newsletter for useful tips and valuable resources.</p>
+                    
+                    <div class="input-group mb-4">
+                        <input type="email" class="form-control" placeholder="Your Mail">
+                        <button class="btn btn-submit" type="button">
+                            <i class="bi bi-send"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Social Media Icons -->
+                    <div class="social-icons">
+                        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="google"><i class="bi bi-google"></i></a>
+                        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="youtube"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Payment Footer -->
+    <footer class="payment-footer">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-md-start text-center mb-2 mb-md-0">
+                    <p class="mb-0">
+                        Copyright ©2025 All rights reserved | This template is made with 
+                        <span class="heart-icon"><i class="bi bi-heart-fill"></i></span> by
+                        <a href="#" class="text-decoration-none copyright-link">Colorlib</a>
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end text-center">
+                    <div class="d-flex justify-content-md-end justify-content-center align-items-center">
+                        <span class="me-2">Payments We Accept</span>
+                        <div class="payment-icons">
+                            <i class="bi bi-credit-card-fill fs-4 ms-2" title="Visa"></i>
+                            <i class="bi bi-credit-card-2-front-fill fs-4 ms-2" title="Mastercard"></i>
+                            <i class="bi bi-credit-card-2-back-fill fs-4 ms-2" title="Discover"></i>
+                            <i class="bi bi-credit-card-2-fill fs-4 ms-2" title="American Express"></i>
+                            <i class="bi bi-paypal fs-4 ms-2" title="PayPal"></i>
+                            <i class="bi bi-wallet-fill fs-4 ms-2" title="Stripe"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@srexi/purecounterjs/dist/purecounter_vanilla.js"></script>
+    <script>
+        new PureCounter();
+    </script>
+    <!-- Carousel Animation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the carousel element
+            const carousel = document.getElementById('heroCarousel');
+            
+            // Function to check if we're on mobile
+            function isMobile() {
+                return window.innerWidth < 768;
+            }
+            
+            // Add event listener for slide change
+            carousel.addEventListener('slid.bs.carousel', function() {
+                // The animation will automatically work because of our CSS rules
+                // that target .carousel-item.active .carousel-text-animate
+                // No additional JS needed as we're handling mobile vs desktop in CSS
+            });
+            
+            // Handle resize events to adjust if user switches between mobile/desktop
+            window.addEventListener('resize', function() {
+                // CSS media queries will handle the animation visibility
+            });
+            
+            // Handle dropdown submenus on mobile
+            const dropdownItems = document.querySelectorAll('.dropdown-item.dropdown-toggle');
+            dropdownItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    if (window.innerWidth < 992) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const submenu = this.nextElementSibling;
+                        if (submenu && submenu.classList.contains('dropdown-submenu')) {
+                            if (submenu.classList.contains('show')) {
+                                submenu.classList.remove('show');
+                            } else {
+                                // Close all other open submenus first
+                                document.querySelectorAll('.dropdown-submenu.show').forEach(menu => {
+                                    if (menu !== submenu) menu.classList.remove('show');
+                                });
+                                submenu.classList.add('show');
+                            }
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Domain Search Functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Domain Search Functionality
+            // Desktop version
+            const desktopDomainForm = document.querySelector('.domain-search-desktop form');
+            if (desktopDomainForm) {
+                desktopDomainForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const domainName = this.querySelector('input').value;
+                    const extension = this.querySelector('select').value;
+                    if (domainName) {
+                        alert(`Searching for domain: ${domainName}${extension}`);
+                        // Here you would typically make an API call to check domain availability
+                    } else {
+                        alert('Please enter a domain name');
+                    }
+                });
+            }
+            
+            // Mobile version
+            const mobileDomainForm = document.querySelector('.domain-input-group');
+            if (mobileDomainForm) {
+                const mobileSearchBtn = mobileDomainForm.querySelector('.search-btn');
+                mobileSearchBtn.addEventListener('click', function() {
+                    const domainName = mobileDomainForm.querySelector('.domain-input').value;
+                    const extension = mobileDomainForm.querySelector('.domain-extension').textContent;
+                    if (domainName) {
+                        alert(`Searching for domain: ${domainName}${extension}`);
+                        // Here you would typically make an API call to check domain availability
+                    } else {
+                        alert('Please enter a domain name');
+                    }
+                });
+            }
+            
+            // Extension selection for mobile
+            const extensionItems = document.querySelectorAll('.extension-item');
+            const mobileExtensionDisplay = document.querySelector('.domain-extension');
+            
+            if (extensionItems.length > 0 && mobileExtensionDisplay) {
+                extensionItems.forEach(item => {
+                    item.addEventListener('click', function() {
+                        const extensionName = this.querySelector('.extension-name').textContent;
+                        mobileExtensionDisplay.textContent = extensionName;
+                        
+                        // Highlight the selected extension
+                        extensionItems.forEach(el => el.classList.remove('selected-extension'));
+                        this.classList.add('selected-extension');
+                    });
+                });
+            }
+        });
+    </script>
+
+    <style>
+        /* Additional styles for domain search interaction */
+        .extension-item {
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 5px;
+            transition: all 0.2s ease;
+        }
+        
+        .extension-item:hover {
+            background-color: #f0f7ff;
+        }
+        
+        .selected-extension {
+            background-color: #e6f0ff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .search-btn:hover {
+            background-color: #0b5ed7;
+        }
+        
+        .domain-input:focus {
+            box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+        }
+    </style>
+</html>
